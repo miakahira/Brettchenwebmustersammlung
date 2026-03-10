@@ -25,7 +25,12 @@ const db = new sqlite3.Database('database.db', (err) => {
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS patterns (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        keyword TEXT NOT NULL
+        name TEXT NOT NULL,
+        anzahl_brettchen INTEGER NOT NULL,
+        typ TEXT NOT NULL,
+        design TEXT NOT NULL,
+        bild_muster TEXT NOT NULL,
+        webbrief TEXT NOT NULL
     );`);
 });
 
@@ -43,7 +48,7 @@ app.get('/patterns', (req, res) => {
 // Beispielroute (GET)
 app.get('/mia', (req, res) => {
     console.log('Mia wurde angefragt');
-    res.json({ message: 'Hallo Mia!' });
+    res.json({ message: 'Hallo Mia! Wie geht es dir?' });
 });
 
 
