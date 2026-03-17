@@ -45,6 +45,20 @@ app.get('/patterns', (req, res) => {
     });
 });
 
+app.post('/patterns', (req, res) => {
+    const { name, anzahl_brettchen, typ, design, bild_muster, webbrief } = req.body;
+    const sql = 'INSERT INTO patterns (name, anzahl_brettchen, typ, design, bild_muster, webbrief) VALUES (?, ?, ?, ?, ?, ?)';
+    const params = [name, anzahl_brettchen, typ, design, bild_muster, webbrief];
+
+    db.run(sql, params, function(err) {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json({ id: this.lastID });
+    });
+});
+
 // Beispielroute (GET)
 app.get('/mia', (req, res) => {
     console.log('Mia wurde angefragt');
