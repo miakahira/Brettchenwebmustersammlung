@@ -1,5 +1,11 @@
 console.log('Script geladen');
 
+//HTML-Elemente
+let patternBlocks=document.createElement("div");
+patternBlocks.classList.add("container");
+patternBlocks.id="patterns";
+document.body.appendChild(patternBlocks);
+
 const imageInput = document.getElementById('fileInput');
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
@@ -29,6 +35,39 @@ function patterns() {
         .then(data => {
             console.log('Patterns:', data);
             // Hier können Sie die Patterns in Ihrem HTML anzeigen
+            for (const pattern of data) {
+                const patternElement = document.createElement('div');
+                patternElement.classList.add('pattern');
+
+
+                const name = document.createElement('h3');
+                name.textContent = `Name: ${pattern.name}`;
+
+                const anzahlBrettchen = document.createElement('p');
+                anzahlBrettchen.textContent = `Anzahl Brettchen: ${pattern.anzahl_brettchen}`;
+
+                const typ = document.createElement('p');
+                typ.textContent = `Typ: ${pattern.typ}`;
+
+                const design = document.createElement('p');
+                design.textContent = `Design: ${pattern.design}`;
+
+                const bildMuster = document.createElement('img');
+                bildMuster.src = `http://localhost:3000/Bilder/Muster/${pattern.bild_muster}`;
+                
+                const webbrief = document.createElement('img');
+                webbrief.src = `http://localhost:3000/Bilder/Webbrief/${pattern.webbrief}`;
+                
+                patternElement.appendChild(name);
+                patternElement.appendChild(anzahlBrettchen);
+                patternElement.appendChild(typ);
+                patternElement.appendChild(design);
+                patternElement.appendChild(bildMuster);
+                patternElement.appendChild(webbrief);
+
+                patternBlocks.appendChild(patternElement);
+            }
+
         })
         .catch(error => {
             console.error('Fehler beim Abrufen der Patterns:', error);
