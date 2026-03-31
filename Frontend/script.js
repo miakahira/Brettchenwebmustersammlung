@@ -27,6 +27,25 @@ function askMia() {
         });
 }
 
+
+const fetchBild = (imagePath) => {
+    fetch(imagePath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.blob();
+        })
+        .then(imageBlob => {
+            // Erstelle einen URL für das Bild
+            const imageUrl = URL.createObjectURL(imageBlob);
+            return imageUrl;
+        })
+        .catch(error => {
+            console.error('Error fetching the image:', error);
+        });
+};
+
 function patterns() {
     console.log('Patterns werden geladen...');
 
@@ -53,11 +72,11 @@ function patterns() {
                 design.textContent = `Design: ${pattern.design}`;
 
                 const bildMuster = document.createElement('img');
-                bildMuster.src = `http://localhost:3000/Bilder/Muster/${pattern.bild_muster}`;
+                bildMuster.src = `http://localhost:3000/Bilder/${pattern.bild_muster}`;
                 bildMuster.alt = `Bild für ${pattern.name}`;
                 
                 const webbrief = document.createElement('img');
-                webbrief.src = `http://localhost:3000/Bilder/Webbrief/${pattern.webbrief}`;
+                webbrief.src = `http://localhost:3000/Bilder/${pattern.webbrief}`;
                 webbrief.alt = `Webbrief für ${pattern.name}`;
                 
                 patternElement.appendChild(name);
