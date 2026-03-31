@@ -54,9 +54,11 @@ function patterns() {
 
                 const bildMuster = document.createElement('img');
                 bildMuster.src = `http://localhost:3000/Bilder/Muster/${pattern.bild_muster}`;
+                bildMuster.alt = `Bild für ${pattern.name}`;
                 
                 const webbrief = document.createElement('img');
                 webbrief.src = `http://localhost:3000/Bilder/Webbrief/${pattern.webbrief}`;
+                webbrief.alt = `Webbrief für ${pattern.name}`;
                 
                 patternElement.appendChild(name);
                 patternElement.appendChild(anzahlBrettchen);
