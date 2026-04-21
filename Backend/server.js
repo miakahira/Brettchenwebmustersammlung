@@ -48,11 +48,13 @@ app.get('/patterns', (req, res) => {
 });
 
 app.post('/patterns', (req, res) => {
-    const { name, anzahl_brettchen, typ, design, bild_muster, webbrief } = req.body;
+    const { name, anzahl_brettchen, typ, design, bild_muster, webbrief } = req.body.data;
     console.log('Empfangene Daten:', req.body);
     console.log('Zu Speicherndes Musterbild:', req.body.image);
     const sql = 'INSERT INTO patterns (name, anzahl_brettchen, typ, design, bild_muster, webbrief) VALUES (?, ?, ?, ?, ?, ?)';
     const params = [name, anzahl_brettchen, typ, design, `Muster/${bild_muster}`, `Webbriefe/${webbrief}`];
+
+    // TODO: Bild speichern (z.B. in einem Ordner) und den Pfad in der Datenbank speichern
 
     db.run(sql, params, function(err) {
         if (err) {
@@ -61,14 +63,6 @@ app.post('/patterns', (req, res) => {
         }
         res.json({ id: this.lastID });
     });
-});
-
-app.get(`/Bilder/Muster/:filename`, (req, res) => {
-    getImage(req, res, 'Muster');
-});
-
-app.get(`/Bilder/Webbriefe/:filename`, (req, res) => {   
-    getImage(req, res, 'Webbriefe');
 });
 
 
@@ -88,16 +82,13 @@ app.get('/Bilder/:filename', (req, res) => {
     }
 });
 
-// Beispielroute (GET)
-app.get('/mia', (req, res) => {
-    console.log('Mia wurde angefragt');
-    res.json({ message: 'Hallo Mia! Wie geht es dir?' });
+/** Bilder abfragen */
+app.get(`/Bilder/Muster/:filename`, (req, res) => {
+    getImage(req, res, 'Muster');
 });
 
-
-// Server starten
-app.listen(PORT, () => {
-    console.log(`Server läuft auf http://localhost:${PORT}`);
+app.get(`/Bilder/Webbriefe/:filename`, (req, res) => {   
+    getImage(req, res, 'Webbriefe');
 });
 
 
@@ -113,4 +104,16 @@ function getImage(req, res, type) {
         res.status(404).json({ error: type + 'bild nicht gefunden' });
     }
 }
+
+// Beispielroute (GET)
+app.get('/mia', (req, res) => {
+    console.log('Mia wurde angefragt');
+    res.json({ message: 'Hallo Mia! Wie geht es dir?' });
+});
+
+
+// Server starten
+app.listen(PORT, () => {
+    console.log(`Server läuft auf http://localhost:${PORT}`);
+});
 

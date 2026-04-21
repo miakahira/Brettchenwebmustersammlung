@@ -28,24 +28,6 @@ function askMia() {
 }
 
 
-const fetchBild = (imagePath) => {
-    fetch(imagePath)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.blob();
-        })
-        .then(imageBlob => {
-            // Erstelle einen URL für das Bild
-            const imageUrl = URL.createObjectURL(imageBlob);
-            return imageUrl;
-        })
-        .catch(error => {
-            console.error('Error fetching the image:', error);
-        });
-};
-
 function patterns() {
     console.log('Patterns werden geladen...');
 
@@ -57,7 +39,6 @@ function patterns() {
             for (const pattern of data) {
                 const patternElement = document.createElement('div');
                 patternElement.classList.add('pattern');
-
 
                 const name = document.createElement('h3');
                 name.textContent = `Name: ${pattern.name}`;
@@ -99,10 +80,12 @@ function savePattern() {
     console.log('Pattern wird gespeichert...', patternData);
     const name = document.getElementById('patternInput').value;
     const anzahl_brettchen = document.getElementById('anzahlBrettchen').value;
-    const typ = 'Beispieltyp';  
-    const design = 'Beispieldesign';
+
+    // Für alle TODOs muss noch ein Eingabefeld im index.html erstellt werden, damit die Werte eingegeben werden können
+    const typ = 'Beispieltyp';  // TODO
+    const design = 'Beispieldesign'; // TODO
     const bild_muster_name = document.getElementById('fileInput').files[0]?.name || 'Kein Bild ausgewählt';
-    const webbrief_bildName = 'Beispielwebbrief';
+    const webbrief_bildName = 'Beispielwebbrief'; // TODO
 
     // Create FormData object
     const formData = new FormData();
@@ -126,9 +109,6 @@ function savePattern() {
         
 }
 // Event-Listener für den Button
-const askMiaButton = document.getElementById('askMiaButton')
-askMiaButton.addEventListener('click', askMia);
-
 const patternsButton = document.getElementById('patterns');
 patternsButton.addEventListener('click', patterns);
 
