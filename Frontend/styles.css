@@ -1,0 +1,27 @@
+.container{
+    display:flex;
+    padding: 0% 2%;
+    justify-content:center;
+    margin: 0 auto;
+}
+
+#patterns{
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.pattern {
+    background-color: rgba(253, 253, 253, 0.90);
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    max-width: 300px;
+    width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pattern img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+}

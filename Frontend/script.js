@@ -6,12 +6,12 @@ patternBlocks.classList.add("container");
 patternBlocks.id="patterns";
 document.body.appendChild(patternBlocks);
 
+
 const imageInput = document.getElementById('fileInput');
 imageInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     console.log('Ausgewählte Datei:', file);
 });
-
 
 function patterns() {
     console.log('Patterns werden geladen...');
@@ -26,7 +26,7 @@ function patterns() {
                 patternElement.classList.add('pattern');
 
                 const name = document.createElement('h3');
-                name.textContent = `Name: ${pattern.name}`;
+                name.textContent = `${pattern.name}`;
 
                 const anzahlBrettchen = document.createElement('p');
                 anzahlBrettchen.textContent = `Anzahl Brettchen: ${pattern.anzahl_brettchen}`;
