@@ -9,17 +9,19 @@
 <body>
     <h1>Brettchenwebmustersammlung</h1>
     <p>Willkommen zur Brettchenwebmustersammlung! Hier findest du eine Vielzahl von Mustern für das Brettchenweben. Stöbere durch die Sammlung und lass dich inspirieren!</p>   
-    <h2>Mustertypen</h2>
+    
+    <h2>Muster hochladen</h2>
+    <div id="uploadSection", class="container">
+        <input type="text" id="patternInput" placeholder="Gib den Namen des Musters ein">
+        <input type="number" id="anzahlBrettchen" placeholder="Anzahl der Brettchen">
+        <input type="file" id="fileInput">
+        <button id="patternSpeichern">Pattern speichern</button>
+    </div>
 
+    <h2>Mustersammlung</h2>
     <button id="patterns">Patterns laden</button>
 
-    <input type="text" id="patternInput" placeholder="Gib den Namen des Musters ein">
-    <input type="number" id="anzahlBrettchen" placeholder="Anzahl der Brettchen">
-
-    <input type="file" id="fileInput">
-
-
-    <button id="patternSpeichern">Pattern speichern</button>
+    
 
     <script src="script.js"></script>
 </body>
