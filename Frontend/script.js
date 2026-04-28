@@ -6,9 +6,14 @@ patternBlocks.classList.add("container");
 patternBlocks.id="patterns";
 document.body.appendChild(patternBlocks);
 
+const bildInput = document.getElementById('MusterDatei');
+bildInput.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    console.log('Ausgewählte Datei:', file);
+});
 
-const imageInput = document.getElementById('fileInput');
-imageInput.addEventListener('change', (event) => {
+const webbriefInput = document.getElementById('WebbriefDatei');
+webbriefInput.addEventListener('change', (event) => {
     const file = event.target.files[0];
     console.log('Ausgewählte Datei:', file);
 });
@@ -63,18 +68,18 @@ function patterns() {
 
 function savePattern() {
     console.log('Pattern wird gespeichert...', patternData);
-    const name = document.getElementById('patternInput').value;
+    const name = document.getElementById('Name').value;
     const anzahl_brettchen = document.getElementById('anzahlBrettchen').value;
 
-    // Für alle TODOs muss noch ein Eingabefeld im index.html erstellt werden, damit die Werte eingegeben werden können
-    const typ = 'Beispieltyp';  // TODO
-    const design = 'Beispieldesign'; // TODO
-    const bild_muster_name = document.getElementById('fileInput').files[0]?.name || 'Kein Bild ausgewählt';
-    const webbrief_bildName = 'Beispielwebbrief'; // TODO
+    
+    const typ = document.getElementById('Typ').value;
+    const design = document.getElementById('Design').value;
+    const bild_muster_name = document.getElementById('MusterDatei').files[0]?.name || 'Kein Bild ausgewählt';
+    const webbrief_bildName = document.getElementById('WebbriefDatei').files[0]?.name || 'Kein Webbrief ausgewählt';
 
     // Create FormData object
     const formData = new FormData();
-    formData.append('image', document.getElementById('fileInput').files[0]); // Image file
+    formData.append('image', document.getElementById('MusterDatei').files[0]); // Image file
     formData.append('data', JSON.stringify({ name,anzahl_brettchen,typ,design,bild_muster: bild_muster_name,webbrief: webbrief_bildName})); // JSON data as string
 
     fetch('http://localhost:3000/patterns', {
