@@ -95,8 +95,9 @@ function savePattern() {
 }
 // Event-Listener für den Button
 const patternsButton = document.getElementById('patterns');
-patternsButton.addEventListener('click', patterns, function(){
+patternsButton.addEventListener('click', function(){
     patternsButton.classList.add('inactive');
+    patterns();
 })
 
 const patternSpeichernButton = document.getElementById('patternSpeichern');
